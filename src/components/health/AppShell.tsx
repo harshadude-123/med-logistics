@@ -1,5 +1,6 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   Activity,
   Boxes,
@@ -8,9 +9,13 @@ import {
   ShieldCheck,
   Rocket,
   Bell,
+  LogIn,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NATIONAL_KPIS } from "@/lib/health-data";
+import { useSession } from "@/hooks/use-session";
+import { supabase } from "@/integrations/supabase/client";
 
 const TABS = [
   { to: "/", label: "Command", icon: Activity },
@@ -23,6 +28,17 @@ const TABS = [
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { session } = useSession();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col">
