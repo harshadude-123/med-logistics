@@ -62,6 +62,25 @@ export function AppShell({ children }: { children: ReactNode }) {
           >
             BRICS
           </Link>
+          {session ? (
+            <button
+              type="button"
+              onClick={handleSignOut}
+              aria-label="Sign out"
+              title={session.user.email ?? "Sign out"}
+              className="grid size-9 place-items-center rounded-xl border border-border bg-secondary/60 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <LogOut className="size-4" />
+            </button>
+          ) : (
+            <Link
+              to="/auth"
+              aria-label="Sign in"
+              className="grid size-9 place-items-center rounded-xl border border-border bg-secondary/60 text-muted-foreground transition-colors hover:text-primary"
+            >
+              <LogIn className="size-4" />
+            </Link>
+          )}
           <span className="relative grid size-9 place-items-center rounded-xl border border-border bg-secondary/60">
             <Bell className="size-4 text-muted-foreground" />
             <span className="absolute -right-0.5 -top-0.5 grid size-4 place-items-center rounded-full bg-critical text-[9px] font-semibold text-critical-foreground">
