@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuditRouteImport } from './routes/audit'
+import { Route as BricsRouteImport } from './routes/brics'
 import { Route as ForecastsRouteImport } from './routes/forecasts'
+import { Route as HandoverRouteImport } from './routes/handover'
 import { Route as RedistributionRouteImport } from './routes/redistribution'
 import { Route as ResourcesRouteImport } from './routes/resources'
 
@@ -19,9 +22,24 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BricsRoute = BricsRouteImport.update({
+  id: '/brics',
+  path: '/brics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForecastsRoute = ForecastsRouteImport.update({
   id: '/forecasts',
   path: '/forecasts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HandoverRoute = HandoverRouteImport.update({
+  id: '/handover',
+  path: '/handover',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RedistributionRoute = RedistributionRouteImport.update({
@@ -37,34 +55,68 @@ const ResourcesRoute = ResourcesRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/brics': typeof BricsRoute
   '/forecasts': typeof ForecastsRoute
+  '/handover': typeof HandoverRoute
   '/redistribution': typeof RedistributionRoute
   '/resources': typeof ResourcesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/brics': typeof BricsRoute
   '/forecasts': typeof ForecastsRoute
+  '/handover': typeof HandoverRoute
   '/redistribution': typeof RedistributionRoute
   '/resources': typeof ResourcesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/brics': typeof BricsRoute
   '/forecasts': typeof ForecastsRoute
+  '/handover': typeof HandoverRoute
   '/redistribution': typeof RedistributionRoute
   '/resources': typeof ResourcesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/forecasts' | '/redistribution' | '/resources'
+  fullPaths:
+    | '/'
+    | '/audit'
+    | '/brics'
+    | '/forecasts'
+    | '/handover'
+    | '/redistribution'
+    | '/resources'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/forecasts' | '/redistribution' | '/resources'
-  id: '__root__' | '/' | '/forecasts' | '/redistribution' | '/resources'
+  to:
+    | '/'
+    | '/audit'
+    | '/brics'
+    | '/forecasts'
+    | '/handover'
+    | '/redistribution'
+    | '/resources'
+  id:
+    | '__root__'
+    | '/'
+    | '/audit'
+    | '/brics'
+    | '/forecasts'
+    | '/handover'
+    | '/redistribution'
+    | '/resources'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuditRoute: typeof AuditRoute
+  BricsRoute: typeof BricsRoute
   ForecastsRoute: typeof ForecastsRoute
+  HandoverRoute: typeof HandoverRoute
   RedistributionRoute: typeof RedistributionRoute
   ResourcesRoute: typeof ResourcesRoute
 }
@@ -78,11 +130,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brics': {
+      id: '/brics'
+      path: '/brics'
+      fullPath: '/brics'
+      preLoaderRoute: typeof BricsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/forecasts': {
       id: '/forecasts'
       path: '/forecasts'
       fullPath: '/forecasts'
       preLoaderRoute: typeof ForecastsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/handover': {
+      id: '/handover'
+      path: '/handover'
+      fullPath: '/handover'
+      preLoaderRoute: typeof HandoverRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/redistribution': {
@@ -104,7 +177,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuditRoute: AuditRoute,
+  BricsRoute: BricsRoute,
   ForecastsRoute: ForecastsRoute,
+  HandoverRoute: HandoverRoute,
   RedistributionRoute: RedistributionRoute,
   ResourcesRoute: ResourcesRoute,
 }
