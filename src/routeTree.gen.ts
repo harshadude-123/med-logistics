@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuditRouteImport } from './routes/audit'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BricsRouteImport } from './routes/brics'
 import { Route as ForecastsRouteImport } from './routes/forecasts'
 import { Route as HandoverRouteImport } from './routes/handover'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuditRoute = AuditRouteImport.update({
   id: '/audit',
   path: '/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BricsRoute = BricsRouteImport.update({
@@ -56,6 +62,7 @@ const ResourcesRoute = ResourcesRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/audit': typeof AuditRoute
+  '/auth': typeof AuthRoute
   '/brics': typeof BricsRoute
   '/forecasts': typeof ForecastsRoute
   '/handover': typeof HandoverRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/audit': typeof AuditRoute
+  '/auth': typeof AuthRoute
   '/brics': typeof BricsRoute
   '/forecasts': typeof ForecastsRoute
   '/handover': typeof HandoverRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/audit': typeof AuditRoute
+  '/auth': typeof AuthRoute
   '/brics': typeof BricsRoute
   '/forecasts': typeof ForecastsRoute
   '/handover': typeof HandoverRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/audit'
+    | '/auth'
     | '/brics'
     | '/forecasts'
     | '/handover'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/audit'
+    | '/auth'
     | '/brics'
     | '/forecasts'
     | '/handover'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/audit'
+    | '/auth'
     | '/brics'
     | '/forecasts'
     | '/handover'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuditRoute: typeof AuditRoute
+  AuthRoute: typeof AuthRoute
   BricsRoute: typeof BricsRoute
   ForecastsRoute: typeof ForecastsRoute
   HandoverRoute: typeof HandoverRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/audit'
       fullPath: '/audit'
       preLoaderRoute: typeof AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/brics': {
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuditRoute: AuditRoute,
+  AuthRoute: AuthRoute,
   BricsRoute: BricsRoute,
   ForecastsRoute: ForecastsRoute,
   HandoverRoute: HandoverRoute,

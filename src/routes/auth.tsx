@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { Activity, Loader2, ShieldCheck } from "lucide-react";
@@ -62,7 +62,7 @@ function AuthPage() {
   const set = (key: keyof typeof fields) => (e: { target: { value: string } }) =>
     setFields((f) => ({ ...f, [key]: e.target.value }));
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setBusy(true);
     try {
