@@ -1,5 +1,6 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   Activity,
   Boxes,
@@ -8,9 +9,13 @@ import {
   ShieldCheck,
   Rocket,
   Bell,
+  LogIn,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NATIONAL_KPIS } from "@/lib/health-data";
+import { useSession } from "@/hooks/use-session";
+import { supabase } from "@/integrations/supabase/client";
 
 const TABS = [
   { to: "/", label: "Command", icon: Activity },
@@ -23,6 +28,17 @@ const TABS = [
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { session } = useSession();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col">
@@ -46,6 +62,25 @@ export function AppShell({ children }: { children: ReactNode }) {
           >
             BRICS
           </Link>
+          {session ? (
+            <button
+              type="button"
+              onClick={handleSignOut}
+              aria-label="Sign out"
+              title={session.user.email ?? "Sign out"}
+              className="grid size-9 place-items-center rounded-xl border border-border bg-secondary/60 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <LogOut className="size-4" />
+            </button>
+          ) : (
+            <Link
+              to="/auth"
+              aria-label="Sign in"
+              className="grid size-9 place-items-center rounded-xl border border-border bg-secondary/60 text-muted-foreground transition-colors hover:text-primary"
+            >
+              <LogIn className="size-4" />
+            </Link>
+          )}
           <span className="relative grid size-9 place-items-center rounded-xl border border-border bg-secondary/60">
             <Bell className="size-4 text-muted-foreground" />
             <span className="absolute -right-0.5 -top-0.5 grid size-4 place-items-center rounded-full bg-critical text-[9px] font-semibold text-critical-foreground">
