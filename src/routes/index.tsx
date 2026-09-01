@@ -28,28 +28,26 @@ function NetworkMap() {
   return (
     <div className="relative h-56 overflow-hidden rounded-xl border border-border grid-mesh bg-secondary/30">
       <svg className="absolute inset-0 size-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-        {[
-          ["46,38", "62,22"],
-          ["46,38", "28,62"],
-          ["28,62", "40,84"],
-          ["62,22", "82,34"],
-          ["74,55", "82,34"],
-          ["36,18", "62,22"],
-        ].map(([a, b], i) => {
-          const [x1, y1] = a.split(",");
-          const [x2, y2] = b.split(",");
-          return (
-            <line
-              key={i}
-              x1={x1}
-              y1={y1}
-              x2={x2}
-              y2={y2}
-              className="route-flow stroke-primary/60"
-              strokeWidth={0.4}
-            />
-          );
-        })}
+        {(
+          [
+            [46, 38, 62, 22],
+            [46, 38, 28, 62],
+            [28, 62, 40, 84],
+            [62, 22, 82, 34],
+            [74, 55, 82, 34],
+            [36, 18, 62, 22],
+          ] as const
+        ).map(([x1, y1, x2, y2], i) => (
+          <line
+            key={i}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            className="route-flow stroke-primary/60"
+            strokeWidth={0.4}
+          />
+        ))}
       </svg>
       {NODES.map((n) => (
         <div
