@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
-import { Activity, Loader2, ShieldCheck } from "lucide-react";
+import { Activity, Loader2, MailCheck, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { useSession } from "@/hooks/use-session";
