@@ -47,6 +47,7 @@ function AuthPage() {
   const { session, loading } = useSession();
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [busy, setBusy] = useState(false);
+  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
   const [fields, setFields] = useState({
     email: "",
     password: "",
