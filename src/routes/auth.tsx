@@ -115,6 +115,22 @@ function AuthPage() {
     }
   }
 
+  async function handleResend() {
+    if (!pendingEmail) return;
+    setBusy(true);
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email: pendingEmail,
+      options: { emailRedirectTo: window.location.origin },
+    });
+    setBusy(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Confirmation email resent");
+  }
+
   async function handleGoogle() {
     setBusy(true);
     const result = await lovable.auth.signInWithOAuth("google", {
