@@ -157,6 +157,40 @@ function AuthPage() {
         </div>
       </div>
 
+      {pendingEmail ? (
+        <div className="rounded-2xl border border-border bg-card/70 p-5 backdrop-blur">
+          <span className="grid size-10 place-items-center rounded-xl bg-primary/15 text-primary">
+            <MailCheck className="size-5" />
+          </span>
+          <h2 className="mt-3 font-display text-base font-semibold">Confirm your email</h2>
+          <p className="mt-1.5 text-xs text-muted-foreground">
+            We sent a confirmation link to <span className="text-foreground">{pendingEmail}</span>.
+            Open it to activate your access — you can&apos;t sign in until the address is confirmed.
+          </p>
+          <div className="mt-4 space-y-2">
+            <Button type="button" className="w-full" onClick={handleResend} disabled={busy}>
+              {busy && <Loader2 className="mr-2 size-4 animate-spin" />}
+              Resend confirmation email
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              onClick={() => {
+                setPendingEmail(null);
+                setMode("signin");
+              }}
+            >
+              Back to sign in
+            </Button>
+          </div>
+          <p className="mt-4 flex items-start gap-1.5 text-[11px] text-muted-foreground">
+            <ShieldCheck className="mt-0.5 size-3.5 shrink-0 text-primary" />
+            After confirming, a coordinator reviews your facility and district before elevating your
+            role beyond field officer.
+          </p>
+        </div>
+      ) : (
       <div className="rounded-2xl border border-border bg-card/70 p-5 backdrop-blur">
         <div className="mb-4 grid grid-cols-2 gap-1 rounded-lg border border-border bg-secondary/40 p-1">
           {(["signin", "signup"] as const).map((m) => (
