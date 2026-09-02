@@ -273,6 +273,7 @@ function AuthPage() {
           Access is role-scoped. New accounts start as field officers until a coordinator elevates them.
         </p>
       </div>
+      )}
     </div>
   );
 }
