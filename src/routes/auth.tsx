@@ -106,7 +106,8 @@ function AuthPage() {
           toast.success("Account created");
           navigate({ to: "/", replace: true });
         } else {
-          toast.success("Check your email to confirm your account");
+          setPendingEmail(parsed.data.email);
+          toast.success("Confirmation email sent");
         }
       }
     } finally {
