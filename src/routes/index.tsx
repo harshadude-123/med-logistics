@@ -76,6 +76,7 @@ function NetworkMap() {
 function CommandCenter() {
   return (
     <AppShell>
+      <SignInDialog />
       <PageHeader
         eyebrow="Command Center"
         title="National situation view"
