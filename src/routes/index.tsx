@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AlertTriangle, ArrowRight, Users, BedDouble, PackageCheck } from "lucide-react";
 import { AppShell } from "@/components/health/AppShell";
+import { SignInDialog } from "@/components/health/SignInDialog";
 import { Bar, Metric, Panel, PageHeader, StatusDot, StatusPill } from "@/components/health/primitives";
 import { ALERTS, NATIONAL_KPIS, NODES, statusLabel } from "@/lib/health-data";
 
