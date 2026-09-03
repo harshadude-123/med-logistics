@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      facilities: {
+        Row: {
+          beds_free: number
+          beds_total: number
+          code: string
+          created_at: string
+          district: string
+          id: string
+          map_x: number
+          map_y: number
+          name: string
+          personnel_present: number
+          personnel_roster: number
+          stock_health: number
+          updated_at: string
+        }
+        Insert: {
+          beds_free?: number
+          beds_total?: number
+          code: string
+          created_at?: string
+          district: string
+          id?: string
+          map_x?: number
+          map_y?: number
+          name: string
+          personnel_present?: number
+          personnel_roster?: number
+          stock_health?: number
+          updated_at?: string
+        }
+        Update: {
+          beds_free?: number
+          beds_total?: number
+          code?: string
+          created_at?: string
+          district?: string
+          id?: string
+          map_x?: number
+          map_y?: number
+          name?: string
+          personnel_present?: number
+          personnel_roster?: number
+          stock_health?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -40,6 +88,56 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      stock_items: {
+        Row: {
+          capacity: number
+          category: string
+          created_at: string
+          days_to_depletion: number
+          expiry_date: string | null
+          facility_id: string
+          id: string
+          name: string
+          reorder_at: number
+          units: number
+          updated_at: string
+        }
+        Insert: {
+          capacity?: number
+          category?: string
+          created_at?: string
+          days_to_depletion?: number
+          expiry_date?: string | null
+          facility_id: string
+          id?: string
+          name: string
+          reorder_at?: number
+          units?: number
+          updated_at?: string
+        }
+        Update: {
+          capacity?: number
+          category?: string
+          created_at?: string
+          days_to_depletion?: number
+          expiry_date?: string | null
+          facility_id?: string
+          id?: string
+          name?: string
+          reorder_at?: number
+          units?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stock_items_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "facilities"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
