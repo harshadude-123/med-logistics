@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BricsRouteImport } from './routes/brics'
 import { Route as ForecastsRouteImport } from './routes/forecasts'
 import { Route as HandoverRouteImport } from './routes/handover'
+import { Route as ManageRouteImport } from './routes/manage'
 import { Route as RedistributionRouteImport } from './routes/redistribution'
 import { Route as ResourcesRouteImport } from './routes/resources'
 
@@ -48,6 +49,11 @@ const HandoverRoute = HandoverRouteImport.update({
   path: '/handover',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManageRoute = ManageRouteImport.update({
+  id: '/manage',
+  path: '/manage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RedistributionRoute = RedistributionRouteImport.update({
   id: '/redistribution',
   path: '/redistribution',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/brics': typeof BricsRoute
   '/forecasts': typeof ForecastsRoute
   '/handover': typeof HandoverRoute
+  '/manage': typeof ManageRoute
   '/redistribution': typeof RedistributionRoute
   '/resources': typeof ResourcesRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/brics': typeof BricsRoute
   '/forecasts': typeof ForecastsRoute
   '/handover': typeof HandoverRoute
+  '/manage': typeof ManageRoute
   '/redistribution': typeof RedistributionRoute
   '/resources': typeof ResourcesRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/brics': typeof BricsRoute
   '/forecasts': typeof ForecastsRoute
   '/handover': typeof HandoverRoute
+  '/manage': typeof ManageRoute
   '/redistribution': typeof RedistributionRoute
   '/resources': typeof ResourcesRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/brics'
     | '/forecasts'
     | '/handover'
+    | '/manage'
     | '/redistribution'
     | '/resources'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/brics'
     | '/forecasts'
     | '/handover'
+    | '/manage'
     | '/redistribution'
     | '/resources'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/brics'
     | '/forecasts'
     | '/handover'
+    | '/manage'
     | '/redistribution'
     | '/resources'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   BricsRoute: typeof BricsRoute
   ForecastsRoute: typeof ForecastsRoute
   HandoverRoute: typeof HandoverRoute
+  ManageRoute: typeof ManageRoute
   RedistributionRoute: typeof RedistributionRoute
   ResourcesRoute: typeof ResourcesRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HandoverRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/manage': {
+      id: '/manage'
+      path: '/manage'
+      fullPath: '/manage'
+      preLoaderRoute: typeof ManageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/redistribution': {
       id: '/redistribution'
       path: '/redistribution'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   BricsRoute: BricsRoute,
   ForecastsRoute: ForecastsRoute,
   HandoverRoute: HandoverRoute,
+  ManageRoute: ManageRoute,
   RedistributionRoute: RedistributionRoute,
   ResourcesRoute: ResourcesRoute,
 }
