@@ -14,6 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
+      brics_partners: {
+        Row: {
+          accuracy: number
+          code: string
+          country: string
+          created_at: string
+          feed: string
+          id: string
+          last_sync_at: string | null
+          metric: string
+          records_shared: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          accuracy?: number
+          code: string
+          country: string
+          created_at?: string
+          feed: string
+          id?: string
+          last_sync_at?: string | null
+          metric?: string
+          records_shared?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          accuracy?: number
+          code?: string
+          country?: string
+          created_at?: string
+          feed?: string
+          id?: string
+          last_sync_at?: string | null
+          metric?: string
+          records_shared?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      brics_sync_events: {
+        Row: {
+          accuracy_after: number
+          created_at: string
+          id: string
+          note: string
+          partner_id: string
+          records_shared: number
+          triggered_by: string | null
+        }
+        Insert: {
+          accuracy_after?: number
+          created_at?: string
+          id?: string
+          note?: string
+          partner_id: string
+          records_shared?: number
+          triggered_by?: string | null
+        }
+        Update: {
+          accuracy_after?: number
+          created_at?: string
+          id?: string
+          note?: string
+          partner_id?: string
+          records_shared?: number
+          triggered_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "brics_sync_events_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "brics_partners"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       facilities: {
         Row: {
           beds_free: number
